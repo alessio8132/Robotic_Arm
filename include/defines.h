@@ -12,6 +12,7 @@ class Servo {
   public:
     Servo(int servoNumber);
     void setAngle(int angle);
+    int getAngle();
     void setAngleSlow(int angle, int delayTime);
   private:
     int _servoNum;

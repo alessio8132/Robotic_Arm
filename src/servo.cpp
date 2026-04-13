@@ -11,6 +11,10 @@ void Servo::setAngle(int angle){
     this->_currentAngle = angle;
 }
 
+int Servo::getAngle(){
+    return this->_currentAngle;
+}
+
 void Servo::setAngleSlow(int angle, int delayTime){
     int currentAngle = _currentAngle;
     int step;
