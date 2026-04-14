@@ -20,14 +20,17 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   for(int i = 0; i < 4; i++){
-    Serial.print("Current Base angle: ");
-    Serial.print(servoList[i].getAngle());
-    Serial.println();
     switch (i){
       case 0:
-      Serial.println("Set Base angle (no change: -1): ");
+      Serial.print("Current base angle: ");
+      Serial.print(servoList[i].getAngle());
+      Serial.println();
+      Serial.println("Set base angle (no change: -1): ");
       break;
       case 1:
+      Serial.print("Current shoulder angle: ");
+      Serial.print(servoList[i].getAngle());
+      Serial.println();
       Serial.println("Set shoulder angle (no change: -1): ");
       break;
       default:
@@ -36,11 +39,13 @@ void loop() {
       Serial.print(" is not used yet.");
       Serial.println();
     }
-    while(Serial.available() == 0){
+    if(i == 0 || i == 1){
+      while(Serial.available() == 0){
+      }
+      int angle_to_set = Serial.parseInt();
+      if(angle_to_set >= 0){
+        servoList[i].setAngleSlow(angle_to_set, 15);
     }
-    int angle_to_set = Serial.parseInt();
-    if(angle_to_set >= 0){
-      servoList[i].setAngleSlow(angle_to_set, 30);
     }
   }
   delay(500);

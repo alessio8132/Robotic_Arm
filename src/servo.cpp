@@ -4,6 +4,7 @@
 
 Servo::Servo(int servoNum){
     this->_servoNum = servoNum;
+    //setAngle(0);
 }
 void Servo::setAngle(int angle){
     int pulseLength = map(angle, 0, 180, SERVO_MIN, SERVO_MAX);
