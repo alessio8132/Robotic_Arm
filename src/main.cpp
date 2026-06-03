@@ -9,17 +9,23 @@ Servo servo3(6);
 Servo servo4(7);
 Servo servoList[4] = {servoBase, servoShoulder, servo3, servo4};
 
+StepperManager stepperManager;
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  pwm.begin();
-  pwm.setPWMFreq(SERVO_FREQ); // Analog servos run at ~50 Hz
+  stepperManager.begin(1000, 1000); // Set max speed and acceleration
+
+  stepperManager.moveStepper(1, 8000); // Move stepper 1 (X-axis) 200 steps
+  //pwm.begin();
+  //pwm.setPWMFreq(SERVO_FREQ); // Analog servos run at ~50 Hz
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  for(int i = 0; i < 4; i++){
+  stepperManager.update();
+}
+  /*for(int i = 0; i < 4; i++){
     switch (i){
       case 0:
       Serial.print("Current base angle: ");
@@ -53,6 +59,6 @@ void loop() {
   //delay(1000);
   //servo2.setAngleSlow(180, 20);
   //delay(1000);
-}
+  */
 
 // put function definitions here:
