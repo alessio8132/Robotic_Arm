@@ -16,7 +16,10 @@ void setup() {
   Serial.begin(9600);
   stepperManager.begin(1000, 1000); // Set max speed and acceleration
 
+  stepperManager.configureStepper(1, 5);
+
   stepperManager.setAngle(1, 20); 
+  stepperManager.setAngle(2, 10);
   //pwm.begin();
   //pwm.setPWMFreq(SERVO_FREQ); // Analog servos run at ~50 Hz
 }
