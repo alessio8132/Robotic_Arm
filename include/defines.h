@@ -26,7 +26,10 @@ class StepperManager {
     ~StepperManager();
 
     void begin(float maxSpeed = 1000.0, float acceleration = 500.0);
-    void moveStepper(int stepperNum, long steps);
+    void configureStepper(int stepperNum, float gearRatio = 1.0, float stepsPerRevolution = 3200.0);
+    void setAngle(int stepperNum, float angleDegrees);
+    void moveAngle(int stepperNum, float angleDegrees);
+    float getAngle(int stepperNum);
     void update();
   private:
     static const int ENALE_PIN = 8;
@@ -34,7 +37,13 @@ class StepperManager {
     static const int Y_STEP = 3; static const int Y_DIR = 6;
     static const int Z_STEP = 4; static const int Z_DIR = 7;
     static const int A_STEP = 12; static const int A_DIR = 13;
+
     AccelStepper* steppers[4];
+    float gearRatios[4];
+    float stepsPerRev[4];
+
+    long degreesToSteps(int index, float degrees);
+    float stepsToDegrees(int index, long steps);
 };
 
 extern Adafruit_PWMServoDriver pwm;
